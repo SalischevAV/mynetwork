@@ -2,6 +2,7 @@ export const CREATE_USER = 'USER/CREATE_USER';
 export const LOAD_USER = 'USER/LOAD_USER';
 export const LOAD_USERS = 'USER/LOAD_USERS';
 export const CLEAR_USERS = 'USER/CLEAR_USERS';
+export const DELETE_USER = 'USER/DELETE_USER';
 
 export const CREATE_POST = 'POST/CREATE_POST';
 export const LOAD_POST = 'POST/LOAD_POST';

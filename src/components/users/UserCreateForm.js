@@ -26,11 +26,15 @@ class UserCreateForm extends React.Component {
     }
 
     submitHandler = event => {
-        event.preventDefault();
-        //const userObject ={...this.state};
-       
-        const newUser = {...this.state}
-
+        event.preventDefault();       
+        //const newUser = {...this.state}
+        const newUser ={
+            name: this.state.name,
+            username: this.state.username,
+            email: this.state.email,
+            phone: this.state.phone,
+            website: this.state.website,
+        }
         this.props.createUser(newUser);
         this.setState({
             isOpen: false,
