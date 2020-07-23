@@ -1,11 +1,8 @@
-import React from 'react';
+ import React from 'react';
 import { connect } from 'react-redux';
 import { createUser } from '../../redux/actions/actionsUser';
+import Modal from '../modal/Modal';
 
-const modalStyle = {
-    position: 'relative',
-    display: 'flex',
-}
 
 const modalBodyStyle = {
     background: 'white',
@@ -25,6 +22,7 @@ class UserCreateForm extends React.Component {
         };
     }
 
+    
     submitHandler = event => {
         event.preventDefault();       
         //const newUser = {...this.state}
@@ -35,17 +33,25 @@ class UserCreateForm extends React.Component {
             phone: this.state.phone,
             website: this.state.website,
         }
+       
         this.props.createUser(newUser);
-        this.setState({
+       
+
+        
+        this.clearState();
+    }
+
+    clearState = () => this.setState({        
             isOpen: false,
+            valueValid: false,
             name: '',
             username: '',
             email: '',
             phone: '',
-            website: '',
-        })
-    }
+            website: '',        
+    })
 
+    
     changeInputHandler = event =>{
         event.persist();
         this.setState(previousState =>({...previousState, ...{
@@ -56,11 +62,13 @@ class UserCreateForm extends React.Component {
     render(){
         return (
             <React.Fragment>
-                {!this.state.isOpen &&
+                 {!this.state.isOpen &&
                     <button className="btn btn-success" onClick={() => this.setState({ isOpen: true })}> Create user</button>
                 }
+            <Modal>
+               
                 {this.state.isOpen &&
-                    <div className='modal' style={modalStyle}>
+                    <div className='modal'>
                         <div className='modal-body' style={modalBodyStyle}>
                             <form onSubmit={this.submitHandler} >
                                 <div className="form-group">
@@ -125,12 +133,14 @@ class UserCreateForm extends React.Component {
                                     />
                                     <small id="telHelp" className="form-text text-muted">We'll never share your phone with anyone else.</small>
                                 </div>
-                                <button type="submit" className="btn btn-success">Create</button>
+                                <button type="submit" className="btn btn-outline-success">Create</button>
+                                <button type="button" className="btn btn-outline-secondary" onClick={()=>this.setState({isOpen: false})}>Close</button>
 
                             </form>
                         </div>
                     </div>
                 }
+            </Modal>
             </React.Fragment>
         )
     }
@@ -184,5 +194,4 @@ export default () => {
         </React.Fragment>
     )
 }
-onClick={() => this.setState({ isOpen: false })}
 */

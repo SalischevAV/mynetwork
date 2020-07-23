@@ -7,6 +7,9 @@ export const DELETE_USER = 'USER/DELETE_USER';
 export const CREATE_POST = 'POST/CREATE_POST';
 export const LOAD_POST = 'POST/LOAD_POST';
 export const LOAD_POSTS = 'POST/LOAD_POSTS';
+export const UPDATE_POST = 'POST/UPDATE_POST';
+export const CLEAR_POSTS = 'POST/CLEAR_POSTS';
+export const FILTER_POSTS = 'POST/FILTER_POSTS';
 
 export const CREATE_ALBUM = 'ALBUM/CREATE_ALBUM';
 export const LOAD_ALBUN = 'ALBUM/LOAD_ALBUM';

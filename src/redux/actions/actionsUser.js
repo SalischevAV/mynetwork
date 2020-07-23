@@ -26,14 +26,13 @@ export function createUser(user){
             body: JSON.stringify({user}) 
         });
             const data = await response.json();
-            console.log(data);
             dispatch({
                 type: CREATE_USER,
                 payload:{...user, id: data.id}
             });
         }
         catch(err){
-            console.log(err)
+            console.log(err.message)
         }
     }
 }

@@ -7,20 +7,23 @@ import App from './App';
 import {rootReducer} from './redux/reducers/rootReducer';
 import * as serviceWorker from './serviceWorker';
 
+const root = document.getElementById('root');
+const modal = document.getElementById('modal');
 
 const store = createStore(rootReducer, compose(
   applyMiddleware(thunk),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-))
+));
 
 const app = (
   <Provider store={store}>
     <App />
   </Provider>
-)
+);
+
 ReactDOM.render(
   app,
-  document.getElementById('root')
+  root
 );
 
 // If you want your app to work offline and load faster, you can change

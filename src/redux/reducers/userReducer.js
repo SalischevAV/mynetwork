@@ -14,7 +14,7 @@ export const userReducer = (state = initialState, action) =>{
         case CREATE_USER:
             return{...state, users: state.users.concat([action.payload])};
         case DELETE_USER:
-            return{...state, users: state.users.filter(item => item.id != action.payload)};
+            return{...state, users: state.users.filter(item => item.id !== action.payload)};
         case LOAD_USER:
         default: return state;
     }
