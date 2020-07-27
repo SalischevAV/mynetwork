@@ -1,17 +1,28 @@
-import {CREATE_USER, LOAD_USER, LOAD_USERS, CLEAR_USERS, DELETE_USER} from '../types';
+import {CREATE_USER, LOAD_USER, LOAD_USERS, CLEAR_USERS, DELETE_USER, FILTER_USERS} from '../types';
+import {showLoader, hideLoader, showAlert, hideAlert, disableButtons, enableButtons} from './actionApp';
 
 export function loadUsers(){
     return async dispatch =>{
         try{
+            dispatch(showLoader());
+            dispatch(disableButtons());
             const response = await fetch('https://jsonplaceholder.typicode.com/users');
             const data = await response.json();
+           setTimeout(()=>{
             dispatch({
                 type: LOAD_USERS,
                 payload: data,
             });
+            dispatch(hideLoader());
+            dispatch(enableButtons());
+           }, 2000);           
+            
         }
         catch(err){
-            console.log(err);
+            dispatch(hideLoader());
+            dispatch(enableButtons());
+            dispatch(showAlert(err.message));
+            console.log(err)
         }
     }
 
@@ -20,6 +31,8 @@ export function loadUsers(){
 export function createUser(user){
     return async dispatch =>{
         try{
+            dispatch(showLoader());
+            dispatch(disableButtons());
             const response = await fetch('https://jsonplaceholder.typicode.com/users',{
             headers: {'Contetnt-type': 'application/json'},
             method: 'POST',
@@ -30,16 +43,29 @@ export function createUser(user){
                 type: CREATE_USER,
                 payload:{...user, id: data.id}
             });
+            dispatch(hideLoader());
+            dispatch(enableButtons());
         }
         catch(err){
-            console.log(err.message)
+            dispatch(hideLoader());
+            dispatch(enableButtons());
+            dispatch(showAlert(err.message));
         }
+    }
+}
+
+export function filterUsers(id){
+    return{
+        type:FILTER_USERS,
+        payload: id
     }
 }
 
 export function deleteUser(id){
     return async dispatch =>{
         try{
+            dispatch(showLoader());
+            dispatch(disableButtons());
             const response =await fetch(('https://jsonplaceholder.typicode.com/users/'+id.toString()),{
                 eaders: { "Content-Type": "application/json" },
                 method: "DELETE",
@@ -48,9 +74,14 @@ export function deleteUser(id){
                 type: DELETE_USER,
                 payload: id
             })
+            dispatch(hideLoader());
+            dispatch(enableButtons());
         }
         catch(err)
         {
+            dispatch(hideLoader());
+            dispatch(enableButtons());
+            dispatch(showAlert(err.message));
             console.log(err)
         }
     }

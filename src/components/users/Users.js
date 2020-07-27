@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import User from './User';
 import UserCreateForm from './UserCreateForm';
@@ -7,10 +7,7 @@ import { loadUsers, clearUsers } from '../../redux/actions/actionsUser';
 export default () => {
   const dispatch = useDispatch();
   const users = useSelector(state => state.user.users);
-
-
-
-
+  
   return (
     <React.Fragment>
       <div className='row'>
@@ -28,9 +25,3 @@ export default () => {
     </React.Fragment>
   )
 }
-
-/*
-   { if(!users.length){
-        <button className="btn btn-primary"onClick={() => dispatch(loadUsers())}>Загрузить</button>
-    }}
-*/

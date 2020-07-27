@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteUser } from '../../redux/actions/actionsUser';
 import {filterPosts} from '../../redux/actions/actionPost';
@@ -8,7 +8,6 @@ import {filterPosts} from '../../redux/actions/actionPost';
 
 export default ({ user }) => {
     const dispatch = useDispatch();
-    const users = useSelector(state => state.user.users);
 
     return (
         <div className="card" >
@@ -25,7 +24,7 @@ export default ({ user }) => {
             <div className="card-body">
                 <div className='row'>
                     <div className='col'>
-                        <Link to='/posts' className="card-link" onClick={() => dispatch(filterPosts(user.id))}>Posts</Link>
+                        <Link to={'/posts/userId/'+user.id} className="card-link" onClick={() => dispatch(filterPosts(user.id))}>Posts</Link>
                         <Link to='/albums' className="card-link">Albums</Link>
                     </div>
                     <div className='col'>

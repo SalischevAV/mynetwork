@@ -8,7 +8,6 @@ import {rootReducer} from './redux/reducers/rootReducer';
 import * as serviceWorker from './serviceWorker';
 
 const root = document.getElementById('root');
-const modal = document.getElementById('modal');
 
 const store = createStore(rootReducer, compose(
   applyMiddleware(thunk),
