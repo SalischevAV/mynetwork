@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import Users from './components/users/Users';
-import Albums from './components/albums/Albums';
-import Posts from './components/posts/Posts'
-import InformBar from './components/common/InformBar'
+import Main from './components/Main';
+import Login from './components/authComponents/Login';
+import Signup from './components/authComponents/Signup';
+import { AuthProvider } from './auth/Auth';
+import PrivateRoute from './auth/PrivateRoute';
 
 
 
 function App() {
+
   const disabledButtons = useSelector(state => state.app.disabled);
   useEffect(() => {
     const arrButton = document.getElementsByTagName("BUTTON");
@@ -17,19 +19,16 @@ function App() {
     }
   })
 
-
   return (
-    <Router>
-      <div className="container" id="root">
-        <InformBar />
-        <Switch>
-          <Route path='/users' component={Users} />
-          <Route path='/albums' component={Albums} />
-          <Route path='/' component={Posts} />
-        </Switch>
-      </div>
-    </Router>
-  );
+    <AuthProvider>
+      <Router>
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/signup' component={Signup} />
+        <PrivateRoute exact path='/' component={Main} />
+      </Router>
+    </AuthProvider>
+  )
+
 }
 
 export default App;
