@@ -12,7 +12,6 @@ export default (props) =>{
         <div className='sticky-top bg-light'>
          { alert&& <Alert alert={alert} />}
          {loading && <Loader />}
-         <Navigation />
         </div>
         
     )
