@@ -13,7 +13,7 @@ export const postReducer = (state = initialState, action) => {
         case CLEAR_POSTS:
             return {...state, posts: []};
         case FILTER_POSTS:
-            return {...state, posts: state.posts.filter(post => post.userId === action.payload )}
+            return {...state, posts: state.posts.filter(post => post.userId === action.payload )};
         case UPDATE_POST:
         default: return state;
     }

@@ -12,9 +12,9 @@ return (
       <div className="container" id="root">     
         <Navigation />
         <Switch>
-          <Route path={props.match.url +'/users'} component={Users} />
-          <Route path={props.match.url +'/albums'} component={Albums} />
-          <Route path={props.match.url +'/'} component={Posts} />
+          <Route path='/users' component={Users} />
+          <Route path='/albums' component={Albums} />
+          <Route path='/' component={Posts} />
         </Switch>
       </div>
     </Router>

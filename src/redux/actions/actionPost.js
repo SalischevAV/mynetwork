@@ -1,5 +1,5 @@
-import { CREATE_POST, LOAD_POSTS, LOAD_POST, CLEAR_POSTS, FILTER_POSTS } from '../types';
-import { hideLoader, showLoader, hideAlert, showAlert, disableButtons, enableButtons } from './actionApp';
+import { CREATE_POST, LOAD_POSTS, CLEAR_POSTS, FILTER_POSTS } from '../types';
+import { hideLoader, showLoader, showAlert, disableButtons, enableButtons } from './actionApp';
 
 export function loadPosts() {
     return async dispatch => {

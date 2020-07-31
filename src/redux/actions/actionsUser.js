@@ -67,7 +67,7 @@ export function deleteUser(id){
             dispatch(showLoader());
             dispatch(disableButtons());
             const response =await fetch(('https://jsonplaceholder.typicode.com/users/'+id.toString()),{
-                eaders: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json" },
                 method: "DELETE",
             });
             dispatch({
