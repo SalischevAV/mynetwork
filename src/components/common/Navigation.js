@@ -11,6 +11,7 @@ export default () =>{
             <li className='nav-item'><Link to='/posts' className='btn btn-outline-secondary'>Posts</Link></li>
             <li className='nav-item'><Link to='/albums' className='btn btn-outline-secondary'>Albums</Link></li>
             <li className='nav-item'><Link to='/users' className='btn btn-outline-secondary'>Users</Link></li>
+            <li className='nav-item'><Link to='/news' className='btn btn-outline-secondary'>News feed</Link></li>
         </ul>
         <div className='navbar-brand'>
             <button className='btn btn-outline-info' onClick={()=>app.auth().signOut()}>Log Out</button>

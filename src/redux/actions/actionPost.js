@@ -36,7 +36,6 @@ export function createPost(post) {
                 body: JSON.stringify({ post })
             });
             const data = await response.json();
-            console.log(data)
             dispatch({
                 type: CREATE_POST,
                 payload: { ...post, userId: data.userId }

@@ -1,11 +1,6 @@
 import React from 'react';
-import {useDispatch} from 'react-redux';
-
-
 
 export default ({ comment }) => {
-    const dispatch = useDispatch();
-
     return (
         <div className="card shadow p-3 mb-5 bg-gray rounded" >
             <div className="card-body">
