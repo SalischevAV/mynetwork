@@ -7,7 +7,7 @@ const initialState = {
 export const newsReducer = (state = initialState, action) => {
     switch (action.type){
         case LOAD_NEWS:
-            return {...state, news: state.news.concat(action.payload)};        
+            return {...state, news: action.payload};        
         default: return state;
     }
 };
