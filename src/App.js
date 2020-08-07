@@ -8,6 +8,7 @@ import { AuthProvider } from './components/authComponents/Auth';
 import PrivateRoute from './components/authComponents/PrivateRoute';
 import InformBar from './components/common/InformBar';
 import Loader from './components/common/Loader';
+import { Suspense } from 'react';
 
 
 
@@ -22,6 +23,7 @@ function App() {
   })
   
   return (
+    
     <AuthProvider>
       <InformBar />    
       <Router>
@@ -30,6 +32,7 @@ function App() {
         <PrivateRoute exact path='/' component={Main} />
       </Router>
     </AuthProvider> 
+  
   )
   
 }

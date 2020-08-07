@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import UserMini from '../users/UserMini';
 import Post from '../posts/Post';
 import Comments from '../comments/Comments';
 
 export default ({ newsItem }) => {
     const [collapsed, setCollapsed] = useState(true);
-    const toggleCollapseHandler =()=> {
+    const toggleCollapseHandler = () => {
         setCollapsed(!collapsed);
     };
     return (
@@ -26,11 +26,11 @@ export default ({ newsItem }) => {
                                 Comments
                             </button>
                         </p>
-                        <div 
+                        <div
                             className={collapsed ? 'collapse' : null}
                             id="commentsArea"
                         >
-                        <Comments comments={newsItem.comments} />
+                                <Comments comments={newsItem.comments} />
                         </div>
                     </div>
                 </div>
