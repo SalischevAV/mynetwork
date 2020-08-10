@@ -2,7 +2,6 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import Alert from './Alert';
 import Loader from './Loader';
-import Navigation from './Navigation';
 
 export default (props) =>{
 

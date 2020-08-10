@@ -4,6 +4,7 @@ import {postReducer} from './postReducer';
 import {commentReducer} from './commentReducer';
 import {appReducer} from './appReducer';
 import { newsReducer } from './newsReducer';
+import { filterReducer } from './filterReducer';
 
 export const rootReducer = combineReducers({
     user: userReducer,
@@ -11,4 +12,5 @@ export const rootReducer = combineReducers({
     comment: commentReducer,
     app: appReducer,
     news: newsReducer,
+    filter: filterReducer,
 });

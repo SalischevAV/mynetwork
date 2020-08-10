@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy } from 'react';
+import React, { useState} from 'react';
 import UserMini from '../users/UserMini';
 import Post from '../posts/Post';
 import Comments from '../comments/Comments';
@@ -30,7 +30,7 @@ export default ({ newsItem }) => {
                             className={collapsed ? 'collapse' : null}
                             id="commentsArea"
                         >
-                                <Comments comments={newsItem.comments} />
+                            <Comments comments={newsItem.comments} />
                         </div>
                     </div>
                 </div>

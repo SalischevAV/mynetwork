@@ -1,4 +1,4 @@
-import {CREATE_USER, LOAD_USER, LOAD_USERS, CLEAR_USERS, DELETE_USER, FILTER_USERS} from '../types';
+import {CREATE_USER, LOAD_USER, LOAD_USERS, CLEAR_USERS, DELETE_USER} from '../types';
 import {showLoader, hideLoader, showAlert, hideAlert, disableButtons, enableButtons} from './actionApp';
 
 export function loadUsers(){
@@ -54,12 +54,6 @@ export function createUser(user){
     }
 }
 
-export function filterUsers(id){
-    return{
-        type:FILTER_USERS,
-        payload: id
-    }
-}
 
 export function deleteUser(id){
     return async dispatch =>{

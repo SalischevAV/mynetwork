@@ -7,13 +7,10 @@ import Signup from './components/authComponents/Signup';
 import { AuthProvider } from './components/authComponents/Auth';
 import PrivateRoute from './components/authComponents/PrivateRoute';
 import InformBar from './components/common/InformBar';
-import Loader from './components/common/Loader';
-import { Suspense } from 'react';
-
 
 
 function App() {
-  
+
   const disabledButtons = useSelector(state => state.app.disabled);
   useEffect(() => {
     const arrButton = document.getElementsByTagName("BUTTON");
@@ -23,18 +20,16 @@ function App() {
   })
   
   return (
-    
     <AuthProvider>
-      <InformBar />    
+      <InformBar />
       <Router>
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={Signup} />
-        <PrivateRoute exact path='/' component={Main} />
+        <PrivateRoute path='/' component={Main} />
       </Router>
-    </AuthProvider> 
-  
+    </AuthProvider>
   )
-  
+
 }
 
 export default App;
