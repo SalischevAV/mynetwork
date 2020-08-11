@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { connect } from 'react-redux';
 import { createPost } from '../../redux/actions/actionPost';
 import Modal from '../modal/Modal';
+import { AuthContext } from '../authComponents/Auth';
+import { createUser } from '../../redux/actions/actionsUser';
 
 const modalBodyStyle = {
     background: 'white',
     padding: '2rem',
 }
+
+
 
 class PostCreateForm extends React.Component {
     constructor(props) {
@@ -15,8 +19,9 @@ class PostCreateForm extends React.Component {
             isOpen: false,
             title: '',
             body: '',
-            userId: ''
+            userId: '',
         }
+        
     }
 
     InputChangeHandler = (event) => {
@@ -32,7 +37,7 @@ class PostCreateForm extends React.Component {
         event.preventDefault();
 
         const newPost = {
-            userId: this.state.userId,
+            userId: Number(this.context.currentUser.displayName),
             title: this.state.title,
             body: this.state.body
         }
@@ -65,6 +70,7 @@ class PostCreateForm extends React.Component {
                                         <label htmlFor="userId">User name</label>
                                         <input
                                             type="text"
+                                            disabled='disabled'
                                             className="form-control"
                                             id="userId"
                                             name='userId'
@@ -107,6 +113,8 @@ class PostCreateForm extends React.Component {
     }
 
 }
+
+PostCreateForm.contextType = AuthContext;
 
 const mapDispatchToProps = {
     createPost

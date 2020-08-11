@@ -6,19 +6,24 @@ import { Link } from 'react-router-dom';
 import app from "../../auth/base";
 
 const SignUp = ({ history }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+ // const [email, setEmail] = useState('');
+ // const [password, setPassword] = useState('');
+  const [user, setUser]=useState({});
 
   const dispatch = useDispatch();
 
   const handleSignUp = useCallback(async event => {
     event.preventDefault();
-    const { email, password } = event.target.elements;
+    const { email, password, displayName } = event.target.elements;
     try {
       await app
         .auth()
         .createUserWithEmailAndPassword(email.value, password.value);
       history.push("/");
+      await app
+        .auth().currentUser.updateProfile({
+          displayName: displayName.value
+        })
     } catch (error) {
       dispatch(showAlert(error.message));
     }
@@ -36,10 +41,10 @@ const SignUp = ({ history }) => {
                 className="form-control"
                 id="email"
                 name="email"
-                value={email}
+                value={user.email}
                 placeholder="email"
                 required="required"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setUser(e.target.value)}
               />
               <span className="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
@@ -50,8 +55,20 @@ const SignUp = ({ history }) => {
                 name="password"
                 placeholder="password"
                 required="required"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={user.password}
+                onChange={(e) => setUser(e.target.value)}
+              />
+              <span className="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div className="form-group">
+              <input type="text"
+                className="form-control"
+                id="displayName"
+                name="displayName"
+                placeholder="display name"
+                required="required"
+                value={user.displayName}
+                onChange={(e) => setUser(e.target.value)}
               />
               <span className="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>

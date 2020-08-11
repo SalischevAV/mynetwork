@@ -40,33 +40,3 @@ export function loadNews() {
 }
     }
 }
-
-/*
-post['comments'] = commentsArr.filter(comment => comment.postID === post.id);
-                console.log(post.comments);
-                post['user'] = usersArr.find(user => user.id === post.userID);  
-                console.log(post.user)
-                
-                
- const newsArr = postsArr.map((post) => 
-            ({
-                    ...post,
-                    user: usersArr,
-                    comments: commentsArr
-                })); 
-                
-                
- for (let i=0; i++; i <postsArr.length){
-               let user = usersArr.find(user => user.id === postsArr[i].userID);
-               let comments = commentsArr.filter(comment => comment.postID === postsArr[i].id);
-               postsArr[i] = {
-                ...postsArr[i] ,
-                user: user,
-                comments: comments,
-               }
-           }
-
-           //let user = usersArr.find(user => user.id === post.userID);
-            //let comments = commentsArr.filter(comment => comment.postID === post.id);
-
-            */
