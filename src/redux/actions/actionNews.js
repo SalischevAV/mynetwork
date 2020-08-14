@@ -1,4 +1,4 @@
-import { LOAD_NEWS } from '../types';
+import { LOAD_NEWS, CREATE_NEWS } from '../types';
 import { hideLoader, showLoader, showAlert, disableButtons, enableButtons } from './actionApp';
 
 export function loadNews() {
@@ -39,4 +39,11 @@ export function loadNews() {
     dispatch(showAlert(err.message));
 }
     }
+}
+
+export function createNews(post){
+    return({
+        type: CREATE_NEWS,
+        payload: post,
+    })
 }

@@ -63,7 +63,6 @@ export function filterAlbums(id){
         const response = await fetch('https://jsonplaceholder.typicode.com/albums');
         const albums = await response.json();
         const filteredAlbums = albums.filter(album => album.userId == id);
-        console.log(filteredAlbums);
 
         dispatch({
             type: FILTER_ALBUMS,

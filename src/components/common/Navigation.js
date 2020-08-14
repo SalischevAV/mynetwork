@@ -15,7 +15,7 @@ export default (props) =>{
             
         </ul>
         <div className='navbar-brand'>{props.displayName}
-    <button className='btn btn-outline-info' onClick={()=>app.auth().signOut()}>Log Out</button>
+            <button className='btn btn-outline-info' onClick={()=>app.auth().signOut()}>Log Out</button>
         </div>
         </nav>
     )

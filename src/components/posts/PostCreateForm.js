@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { createPost } from '../../redux/actions/actionPost';
 import Modal from '../modal/Modal';
 import { AuthContext } from '../authComponents/Auth';
-import { createUser } from '../../redux/actions/actionsUser';
+import  app  from '../../auth/base';
 
 const modalBodyStyle = {
     background: 'white',
     padding: '2rem',
 }
 
-
+const currentUser = app.auth().currentUser;
 
 class PostCreateForm extends React.Component {
     constructor(props) {
@@ -37,10 +37,11 @@ class PostCreateForm extends React.Component {
         event.preventDefault();
 
         const newPost = {
-            userId: Number(this.context.currentUser.displayName),
+            userId: currentUser.uid,
             title: this.state.title,
             body: this.state.body
         }
+        
 
         this.props.createPost(newPost);
         this.clearState();
@@ -66,18 +67,6 @@ class PostCreateForm extends React.Component {
                         <div className='modal'>
                             <div className='modal-body' style={modalBodyStyle}>
                                 <form onSubmit={this.submitHandler}>
-                                    <div className="form-group">
-                                        <label htmlFor="userId">User name</label>
-                                        <input
-                                            type="text"
-                                            disabled='disabled'
-                                            className="form-control"
-                                            id="userId"
-                                            name='userId'
-                                            value={this.state.userId}
-                                            onChange={this.InputChangeHandler}
-                                        />
-                                    </div>
                                     <div className="form-group">
                                         <label htmlFor="title">Title</label>
                                         <input

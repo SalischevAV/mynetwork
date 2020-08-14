@@ -1,5 +1,6 @@
 import { CREATE_POST, LOAD_POSTS, CLEAR_POSTS, FILTER_POSTS } from '../types';
 import { hideLoader, showLoader, showAlert, disableButtons, enableButtons } from './actionApp';
+import { createNews } from './actionNews';
 
 export function loadPosts() {
     return async dispatch => {
@@ -38,10 +39,11 @@ export function createPost(post) {
             const data = await response.json();
             dispatch({
                 type: CREATE_POST,
-                payload: { ...post, userId: data.userId }
-            })
+                payload: { ...post, id:post.userId} //need server
+            });
             dispatch(hideLoader());
             dispatch(enableButtons());
+            //dispatch(createNews({ ...post, id:101}));
         }
         catch (err) {
             dispatch(hideLoader());

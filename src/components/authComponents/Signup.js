@@ -20,10 +20,13 @@ const SignUp = ({ history }) => {
       history.push("/");
       await app
         .auth().currentUser.updateProfile({
-          displayName: displayName.value
+          displayName: displayName.value,
+          //uid: app.auth().currentUser.uid,
+          
         })
     } catch (error) {
       dispatch(showAlert(error.message));
+      console.log(error.message)
     }
   }, [history]);
 
