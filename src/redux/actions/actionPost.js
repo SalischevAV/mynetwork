@@ -52,14 +52,6 @@ export function createPost(post) {
     }
 }
 
-export function filterPosts(id) {
-
-    return {
-        type: FILTER_POSTS,
-        payload: id
-    }
-}
-
 export function clearPosts() {
     return {
         type: CLEAR_POSTS

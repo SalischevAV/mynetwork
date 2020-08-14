@@ -16,10 +16,4 @@ export default (props) => {
 
 /*
  <button className="btn btn-primary" onClick={() => dispatch(loadComments())}>Load</button>
-----------------------------------------------------------------------------------------------
-
-
-
-
-
 */

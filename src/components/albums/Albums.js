@@ -1,8 +1,17 @@
 import React from 'react';
+import Album from './Album';
 
-export default class Albums extends React.Component{
 
-    render(){
-        return <h1>Albums</h1>
-    }
+export default (props)=>{
+    return(
+        <React.Fragment>            
+            <div className="row row-cols-1 row-cols-md-1">
+                {props.albums.map(album => <Album album={album} key={album.id} />)}
+            </div>
+        </React.Fragment>
+    )
 }
+
+/*
+<Album album={album} key={album.id} />
+*/

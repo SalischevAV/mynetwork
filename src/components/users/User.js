@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteUser } from '../../redux/actions/actionsUser';
-import {filterPosts} from '../../redux/actions/actionPost';
+import {filterPosts, filterAlbums} from '../../redux/actions/actionFilter';
 
 
 
@@ -13,7 +13,6 @@ export default ({ user }) => {
         <div className="card" >
             <div className="card-body">
                 <h5 className="card-title">{user.name}</h5>
-                <p className="card-text">address: here will be component for address</p>
             </div>
             <ul className="list-group list-group-flush">
                 <li className="list-group-item">username: {user.username}</li>
@@ -24,8 +23,8 @@ export default ({ user }) => {
             <div className="card-body">
                 <div className='row'>
                     <div className='col'>
-                        <Link to={'/posts/userId/'+user.id} className="card-link" onClick={() => dispatch(filterPosts(user.id))}>Posts</Link>
-                        <Link to='/albums' className="card-link">Albums</Link>
+                        <Link to={'/posts/user/'+ user.id} className="card-link" onClick={() => dispatch(filterPosts(user.id))}>Posts</Link>
+                        <Link to={'/albums/user/'+ user.id} className="card-link" onClick={() => dispatch(filterAlbums(user.id))}>Albums</Link>
                     </div>
                     <div className='col'>
                         <button className='btn btn-outline-danger' onClick={() => dispatch(deleteUser(user.id))}>Delete</button>

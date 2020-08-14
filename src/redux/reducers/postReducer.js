@@ -12,8 +12,6 @@ export const postReducer = (state = initialState, action) => {
             return{...state, posts: state.posts.concat([action.payload])};
         case CLEAR_POSTS:
             return {...state, posts: []};
-        case FILTER_POSTS:
-            return {...state, posts: state.posts.filter(post => post.userId === action.payload )};
         case UPDATE_POST:
         default: return state;
     }

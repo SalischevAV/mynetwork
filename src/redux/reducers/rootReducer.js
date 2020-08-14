@@ -1,15 +1,15 @@
 import {combineReducers} from 'redux';
 import {userReducer} from './userReducer';
 import {postReducer} from './postReducer';
-import {commentReducer} from './commentReducer';
 import {appReducer} from './appReducer';
 import { newsReducer } from './newsReducer';
 import { filterReducer } from './filterReducer';
+import {albumReducer} from './albumReducer';
 
 export const rootReducer = combineReducers({
     user: userReducer,
     post: postReducer,
-    comment: commentReducer,
+    album: albumReducer,
     app: appReducer,
     news: newsReducer,
     filter: filterReducer,
