@@ -1,5 +1,6 @@
 import { FILTER_USER, FILTER_POSTS, FILTER_ALBUMS } from '../types';
 import { showLoader, hideLoader,disableButtons, enableButtons, showAlert } from './actionApp';
+import {SERVER } from '../server';
 
 export function filterUser(id){
    return async dispatch =>{
@@ -7,7 +8,7 @@ export function filterUser(id){
         dispatch(showLoader());
         dispatch(disableButtons());
 
-        const response = await fetch('https://jsonplaceholder.typicode.com/users');
+        const response = await fetch(SERVER + '/users');
         const users = await response.json();
         const filteredUser = users.find(user => user.id == id);
 
@@ -33,7 +34,7 @@ export function filterPosts(id){
         dispatch(showLoader());
         dispatch(disableButtons());
 
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+        const response = await fetch(SERVER + '/posts');
         const posts = await response.json();
         const filteredPosts = posts.filter(post => post.userId == id);
 
@@ -60,7 +61,7 @@ export function filterAlbums(id){
         dispatch(showLoader());
         dispatch(disableButtons());
 
-        const response = await fetch('https://jsonplaceholder.typicode.com/albums');
+        const response = await fetch(SERVER + '/albums');
         const albums = await response.json();
         const filteredAlbums = albums.filter(album => album.userId == id);
 

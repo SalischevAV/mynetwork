@@ -7,7 +7,7 @@ export default (props) => {
     return (
         <div className='row'>
             <div className="col-md-auto">
-            {props.comments.map(comment => <Comment comment={comment} key={comment.id} />)}
+            {props.comments.map(comment => <Comment comment={comment} key={comment._id} />)}
             </div>
         </div>
 

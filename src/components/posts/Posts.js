@@ -18,7 +18,7 @@ export default (props) => {
                 </div>
             </div>
             <div className="row row-cols-1 row-cols-md-1">
-                {props.posts.map(post => <Post post={post} key={post.id} />)}
+                {props.posts.map(post => <Post post={post} key={post._id} />)}
             </div>
         </React.Fragment>
     )

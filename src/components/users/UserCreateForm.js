@@ -25,7 +25,6 @@ class UserCreateForm extends React.Component {
     
     submitHandler = event => {
         event.preventDefault();       
-        //const newUser = {...this.state}
         const newUser ={
             name: this.state.name,
             username: this.state.username,
@@ -34,10 +33,7 @@ class UserCreateForm extends React.Component {
             website: this.state.website,
         }
        
-        this.props.createUser(newUser);
-       
-
-        
+        this.props.createUser(newUser);     
         this.clearState();
     }
 
@@ -113,7 +109,7 @@ class UserCreateForm extends React.Component {
                                         name='phone'
                                         value={this.state.phone}
                                         onChange={this.changeInputHandler}
-                                        pattern="0[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
+                                        //pattern="0[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
                                         placeholder='0xx-xxx-xx-xx'
                                     />
                                     <small id="telHelp" className="form-text text-muted">We'll never share your phone with anyone else.</small>

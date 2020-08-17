@@ -23,8 +23,8 @@ export default ({ user }) => {
             <div className="card-body">
                 <div className='row'>
                     <div className='col'>
-                        <Link to={'/posts/user/'+ user.id} className="card-link" onClick={() => dispatch(filterPosts(user.id))}>Posts</Link>
-                        <Link to={'/albums/user/'+ user.id} className="card-link" onClick={() => dispatch(filterAlbums(user.id))}>Albums</Link>
+                        <Link to={'/posts/user/'+ user._id} className="card-link" onClick={() => dispatch(filterPosts(user._id))}>Posts</Link>
+                        <Link to={'/albums/user/'+ user._id} className="card-link" onClick={() => dispatch(filterAlbums(user._id))}>Albums</Link>
                     </div>
                     <div className='col'>
                         <button className='btn btn-outline-danger' onClick={() => dispatch(deleteUser(user.id))}>Delete</button>

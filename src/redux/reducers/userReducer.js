@@ -9,7 +9,7 @@ const initialState = {
 export const userReducer = (state = initialState, action) =>{
     switch(action.type){
         case LOAD_USERS:
-            return {...state, users: state.users.concat(action.payload)};
+            return {...state, users: action.payload};
            //return {...state, users: action.payload};
         case CLEAR_USERS:
             return{...state, users:[]};

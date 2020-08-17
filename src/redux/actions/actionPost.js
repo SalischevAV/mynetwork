@@ -1,13 +1,14 @@
 import { CREATE_POST, LOAD_POSTS, CLEAR_POSTS, FILTER_POSTS } from '../types';
 import { hideLoader, showLoader, showAlert, disableButtons, enableButtons } from './actionApp';
 import { createNews } from './actionNews';
+import {SERVER } from '../server';
 
 export function loadPosts() {
     return async dispatch => {
         try {
             dispatch(showLoader());
             dispatch(disableButtons());
-            const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+            const response = await fetch(SERVER + '/posts');
             const data = await response.json();
             setTimeout(() => {
                 dispatch({
@@ -31,15 +32,15 @@ export function createPost(post) {
         try {
             dispatch(showLoader());
             dispatch(disableButtons());
-            const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
-                headers: { 'Content-type': 'application/json' },
+            const response = await fetch(SERVER + '/posts', {
+                headers: { 'Content-Type': 'application/json' },
                 method: 'POST',
-                body: JSON.stringify({ post })
+                body: JSON.stringify(post)
             });
             const data = await response.json();
             dispatch({
                 type: CREATE_POST,
-                payload: { ...post, id:post.userId} //need server
+                payload: data
             });
             dispatch(hideLoader());
             dispatch(enableButtons());

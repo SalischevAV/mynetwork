@@ -1,12 +1,13 @@
 import {CREATE_USER, LOAD_USER, LOAD_USERS, CLEAR_USERS, DELETE_USER} from '../types';
 import {showLoader, hideLoader, showAlert, hideAlert, disableButtons, enableButtons} from './actionApp';
+import {SERVER } from '../server';
 
 export function loadUsers(){
     return async dispatch =>{
         try{
             dispatch(showLoader());
             dispatch(disableButtons());
-            const response = await fetch('https://jsonplaceholder.typicode.com/users');
+            const response = await fetch(SERVER + '/users');
             const data = await response.json();
            setTimeout(()=>{
             dispatch({
@@ -22,7 +23,7 @@ export function loadUsers(){
             dispatch(hideLoader());
             dispatch(enableButtons());
             dispatch(showAlert(err.message));
-            console.log(err)
+            console.dir(err)
         }
     }
 
@@ -33,15 +34,15 @@ export function createUser(user){
         try{
             dispatch(showLoader());
             dispatch(disableButtons());
-            const response = await fetch('https://jsonplaceholder.typicode.com/users',{
-            headers: {'Contetnt-type': 'application/json'},
+            const response = await fetch(SERVER + '/users',{
+            headers: {'Content-Type': 'application/json'},
             method: 'POST',
-            body: JSON.stringify({user}) 
+            body: JSON.stringify(user) 
         });
             const data = await response.json();
             dispatch({
                 type: CREATE_USER,
-                payload:{...user, id: data.id}
+                payload:data
             });
             dispatch(hideLoader());
             dispatch(enableButtons());
@@ -60,7 +61,7 @@ export function deleteUser(id){
         try{
             dispatch(showLoader());
             dispatch(disableButtons());
-            const response =await fetch(('https://jsonplaceholder.typicode.com/users/'+id.toString()),{
+            const response =await fetch((SERVER + '/users/'+id.toString()),{
                 headers: { "Content-Type": "application/json" },
                 method: "DELETE",
             });

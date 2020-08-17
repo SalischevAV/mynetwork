@@ -42,7 +42,6 @@ class PostCreateForm extends React.Component {
             body: this.state.body
         }
         
-
         this.props.createPost(newPost);
         this.clearState();
     }

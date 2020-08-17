@@ -17,7 +17,7 @@ export default (props) => {
                 </div>
             </div>
             <div className="row row-cols-1 row-cols-md-1">
-                {props.news.map(newsItem => <NewsItem newsItem={newsItem} key={newsItem.id} />)}
+                {props.news.map(newsItem => <NewsItem newsItem={newsItem} key={newsItem._id} />)}
             </div>
         </React.Fragment>
     )

@@ -20,7 +20,7 @@ export default () => {
         </div>
       </div>
       <div className="row row-cols-1 row-cols-md-1">
-        {users.map(user => <User user={user} key={user.id} />)}
+        {users.map(user => <User user={user} key={user._id} />)}
       </div>
     </React.Fragment>
   )
