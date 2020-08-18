@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from "react";
 import {useDispatch} from 'react-redux';
 import { withRouter } from "react-router";
-import { showAlert } from '../../redux/actions/actionApp';
+import { showAlert } from '../src/redux/actions/actionApp';
 import { Link } from 'react-router-dom';
-import app from "../../auth/base";
+import app from "../src/auth/base";
 
 const SignUp = ({ history }) => {
   const [user, setUser]=useState({});
@@ -19,10 +19,10 @@ const SignUp = ({ history }) => {
         .createUserWithEmailAndPassword(email.value, password.value);
       history.push("/");
       await app
-        .auth().currentUser.updateProfile({
+        .auth()
+        .currentUser.updateProfile({
           displayName: displayName.value,
-          //uid: app.auth().currentUser.uid,
-          
+          //uid: app.auth().currentUser.uid,          
         })
     } catch (error) {
       dispatch(showAlert(error.message));

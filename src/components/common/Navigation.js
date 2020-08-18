@@ -4,7 +4,6 @@ import app from '../../auth/base';
 
 
 export default (props) =>{
-
     return(      
         <nav className="navbar navbar-light bg-light sticky-top">
         <ul className='nav'>

@@ -1,10 +1,10 @@
 import React, { useCallback, useContext, useState } from "react";
 import {useDispatch} from 'react-redux';
 import { withRouter, Redirect } from "react-router";
-import { Link } from 'react-router-dom';
 import { showAlert } from '../../redux/actions/actionApp';
 import app from "../../auth/base";
 import { AuthContext } from "./Auth";
+import {UserCreateForm} from "../users/UserCreateForm.js";
 
 const Login = ({ history }) => {
 
@@ -32,6 +32,7 @@ const Login = ({ history }) => {
     const { currentUser } = useContext(AuthContext);
 
     if (currentUser) {
+        console.log(currentUser);
         return <Redirect to="/" />;
     }
 
@@ -77,7 +78,7 @@ const Login = ({ history }) => {
                     </form>
                 </div>
                 <div className="col col-xs-12 col-md-12 col-lg-12 mt-1 mb-5">
-                    <Link to='/signup' className="btn btn-warning btn-block">I do not have an account</Link>
+                    <UserCreateForm />
                 </div>
             </div>
         </div>
@@ -85,3 +86,4 @@ const Login = ({ history }) => {
 }
 
 export default withRouter(Login);
+

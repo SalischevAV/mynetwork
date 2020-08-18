@@ -46,6 +46,7 @@ export function createUser(user){
             });
             dispatch(hideLoader());
             dispatch(enableButtons());
+            return data;
         }
         catch(err){
             dispatch(hideLoader());

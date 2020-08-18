@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, {useState} from 'react';
+import { useDispatch} from 'react-redux';
 import { createUser } from '../../redux/actions/actionsUser';
 import Modal from '../modal/Modal';
-import app from '../../auth/base';
 
 
 const modalBodyStyle = {
@@ -10,63 +9,45 @@ const modalBodyStyle = {
     padding: '2rem',
 }
 
-export const UserCreateForm = ({ history }) => {
-    const [user, setUser] = useState({});
+export default(props)=> {
+    const[user, setUser] = useState({});
     const dispatch = useDispatch();
-
+    
     const submitHandler = event => {
-        event.preventDefault();
-        const newUser = {
+        event.preventDefault();       
+        const newUser ={
             name: user.name,
             username: user.username,
             email: user.email,
             phone: user.phone,
             website: user.website,
-            password: user.password
         }
-
-        app
-            .auth()
-            .createUserWithEmailAndPassword(user.email, user.password);
-           
-        app
-            .auth()
-            .onAuthStateChanged(currentUser=>{
-                if(currentUser){
-                    currentUser.updateProfile({
-                        displayName:user.username,
-                        email: user.email,
-                        phoneNumber: user.phone,
-                    })
-                    dispatch(createUser({...newUser, firebaseId:currentUser.uid}));
-                }
-            })
+       
+        dispatch(createUser(newUser));     
         clearState();
-    }
+    };
 
-    const closeHandler = () => {
-        setUser({ isOpen: false });
+    const closeHandler = ()=>{
+        setUser({isOpen: false});
         clearState();
     }
 
     const clearState = () => setUser({});
 
-
-    const changeInputHandler = event => {
+    
+    const changeInputHandler = event =>{
         event.persist();
-        setUser(previousState => ({
-            ...previousState, ...{
-                [event.target.name]: event.target.value
-            }
-        }));
+        setUser(previousState =>({...previousState, ...{
+            [event.target.name]: event.target.value
+        }}));
     }
 
-    return (
-        <React.Fragment>
-            {!user.isOpen &&
-                <button className="btn btn-warning btn-block" onClick={() => setUser({ isOpen: true })}> I do not have an account</button>
-            }
-            <Modal>
+        return (
+            <React.Fragment>
+                 {!user.isOpen &&
+                    <button className="btn btn-warning btn-block" onClick={() => setUser({ isOpen: true })}> I do not have an account</button>
+                }
+            <Modal>               
                 {user.isOpen &&
                     <div className='modal'>
                         <div className='modal-body' style={modalBodyStyle}>
@@ -133,17 +114,6 @@ export const UserCreateForm = ({ history }) => {
                                     />
                                     <small id="telHelp" className="form-text text-muted">We'll never share your phone with anyone else.</small>
                                 </div>
-                                <div className="form-group">
-                                    <label htmlFor="name">Password</label>
-                                    <input
-                                        type="password"
-                                        className="form-control"
-                                        id="password"
-                                        name='password'
-                                        value={user.password}
-                                        onChange={changeInputHandler}
-                                    />
-                                </div>
                                 <button type="submit" className="btn btn-outline-success">Create</button>
                                 <button type="button" className="btn btn-outline-secondary" onClick={closeHandler}>Close</button>
 
@@ -152,6 +122,10 @@ export const UserCreateForm = ({ history }) => {
                     </div>
                 }
             </Modal>
-        </React.Fragment>
-    )
-};
+            </React.Fragment>
+        )
+}
+
+
+
+//export default UserCreateForm;

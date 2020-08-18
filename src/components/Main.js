@@ -1,6 +1,6 @@
 import React, { useEffect, Suspense, useContext } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { useSelector, useDispatch, createDispatchHook } from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
 import Navigation from './common/Navigation';
 import User from './users/User';
 import { loadPosts, clearPosts } from '../redux/actions/actionPost';
@@ -8,7 +8,6 @@ import { loadUsers } from '../redux/actions/actionsUser';
 import { loadNews } from '../redux/actions/actionNews';
 import {loadAlbums} from '../redux/actions/actionAlbum'
 import { AuthContext } from './authComponents/Auth';
-import Loader from './common/Loader';
 
 
 const Users = React.lazy(() => import('./users/Users'));
@@ -28,7 +27,7 @@ export default (props) => {
   const filteredUser = useSelector(state => state.filter.filteredUser);
   const filteredPosts = useSelector(state => state.filter.filteredPosts);
   const filteredAlbums = useSelector(state => state.filter.filteredAlbums);
-  const currentUser = useContext(AuthContext);
+  const {currentUser} = useContext(AuthContext);
   const disabledButtons = useSelector(state => state.app.disabled);
 
   const clearPostsBtnClickHandler = () => dispatch(clearPosts());
@@ -47,7 +46,7 @@ export default (props) => {
         <div className="container" id="root">
           <Route
             render={() => <Navigation
-              displayName={currentUser.currentUser.displayName}
+              displayName={currentUser.displayName}
             />}
           />
           <Suspense fallback={'...loading'}>
