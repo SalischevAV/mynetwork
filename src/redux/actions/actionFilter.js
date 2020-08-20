@@ -1,6 +1,6 @@
 import { FILTER_USER, FILTER_POSTS, FILTER_ALBUMS } from '../types';
 import { showLoader, hideLoader,disableButtons, enableButtons, showAlert } from './actionApp';
-import {SERVER } from '../server';
+import {SERVER } from '../../server';
 
 export function filterUser(id){
    return async dispatch =>{

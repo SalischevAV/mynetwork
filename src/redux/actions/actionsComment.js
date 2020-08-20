@@ -1,5 +1,5 @@
 import { LOAD_COMMENTS } from "../types";
-import {SERVER } from '../server';
+import {SERVER } from '../../server';
 
 export function loadComments(id){
     return async dispatch =>{

@@ -1,6 +1,6 @@
 import {LOAD_ALBUMS} from '../types';
 import { hideLoader, showLoader, showAlert, disableButtons, enableButtons } from './actionApp';
-import {SERVER } from '../server';
+import {SERVER } from '../../server';
 
 export function loadAlbums() {
     return async dispatch => {

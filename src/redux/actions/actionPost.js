@@ -1,7 +1,7 @@
 import { CREATE_POST, LOAD_POSTS, CLEAR_POSTS, FILTER_POSTS } from '../types';
 import { hideLoader, showLoader, showAlert, disableButtons, enableButtons } from './actionApp';
 import { createNews } from './actionNews';
-import {SERVER } from '../server';
+import {SERVER } from '../../server';
 
 export function loadPosts() {
     return async dispatch => {

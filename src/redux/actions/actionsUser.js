@@ -1,6 +1,6 @@
 import {CREATE_USER, LOAD_USER, LOAD_USERS, CLEAR_USERS, DELETE_USER} from '../types';
 import {showLoader, hideLoader, showAlert, hideAlert, disableButtons, enableButtons} from './actionApp';
-import {SERVER } from '../server';
+import {SERVER } from '../../server';
 
 export function loadUsers(){
     return async dispatch =>{

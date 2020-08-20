@@ -1,6 +1,6 @@
 import { LOAD_NEWS, CREATE_NEWS } from '../types';
 import { hideLoader, showLoader, showAlert, disableButtons, enableButtons } from './actionApp';
-import {SERVER } from '../server';
+import {SERVER } from '../../server';
 
 export function loadNews() {
     return async dispatch => {

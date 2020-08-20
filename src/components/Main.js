@@ -8,6 +8,8 @@ import { loadUsers } from '../redux/actions/actionsUser';
 import { loadNews } from '../redux/actions/actionNews';
 import {loadAlbums} from '../redux/actions/actionAlbum'
 import { AuthContext } from './authComponents/Auth';
+import { AppUserContext } from './authComponents/AppUser';
+import { AppUserProvider } from './authComponents/AppUser'
 
 
 const Users = React.lazy(() => import('./users/Users'));
@@ -27,7 +29,6 @@ export default (props) => {
   const filteredUser = useSelector(state => state.filter.filteredUser);
   const filteredPosts = useSelector(state => state.filter.filteredPosts);
   const filteredAlbums = useSelector(state => state.filter.filteredAlbums);
-  const {currentUser} = useContext(AuthContext);
   const disabledButtons = useSelector(state => state.app.disabled);
 
   const clearPostsBtnClickHandler = () => dispatch(clearPosts());
@@ -41,12 +42,12 @@ export default (props) => {
   }, []);
 
   return (
+    <AppUserProvider>
     <Router>
       {disabledButtons ? <div></div> :
         <div className="container" id="root">
           <Route
             render={() => <Navigation
-              displayName={currentUser.displayName}
             />}
           />
           <Suspense fallback={'...loading'}>
@@ -86,5 +87,6 @@ export default (props) => {
           </Suspense>
         </div>}
     </Router>
+    </AppUserProvider>
   );
 }
