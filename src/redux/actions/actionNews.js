@@ -8,7 +8,8 @@ export function loadNews() {
             dispatch(showLoader());
             dispatch(disableButtons());
             let response = await fetch(SERVER + '/posts');
-            const postsArr = await response.json();
+            const data = await response.json();
+            const postsArr = data.posts;
 
             response = await fetch(SERVER + '/comments');
             const commentsArr = await response.json();

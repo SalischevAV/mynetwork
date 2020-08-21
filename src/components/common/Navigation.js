@@ -6,7 +6,6 @@ import {  AppUserContext } from '../authComponents/AppUser';
 
 export default (props) =>{
     const appUser = useContext(AppUserContext);
-
     return(      
         <nav className="navbar navbar-light bg-light sticky-top">
         <ul className='nav'>
@@ -17,7 +16,7 @@ export default (props) =>{
             
         </ul>
         <div className='navbar-brand'>
-            <span>{appUser.name}</span>
+            <span className='p-3'>{appUser.name}</span>
             <button className='btn btn-outline-info' onClick={()=>app.auth().signOut()}>Log Out</button>
         </div>
         </nav>

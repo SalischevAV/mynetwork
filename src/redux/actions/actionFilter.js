@@ -8,9 +8,8 @@ export function filterUser(id){
         dispatch(showLoader());
         dispatch(disableButtons());
 
-        const response = await fetch(SERVER + '/users');
-        const users = await response.json();
-        const filteredUser = users.find(user => user.id == id);
+        const response = await fetch(SERVER + '/users/' + id);
+        const filteredUser = await response.json();
 
         dispatch({
             type: FILTER_USER,
@@ -35,8 +34,8 @@ export function filterPosts(id){
         dispatch(disableButtons());
 
         const response = await fetch(SERVER + '/posts');
-        const posts = await response.json();
-        const filteredPosts = posts.filter(post => post.userId == id);
+        const posts = (await response.json()).posts;
+        const filteredPosts = posts.filter(post => post.userId === id);
 
         dispatch({
             type: FILTER_POSTS,
@@ -63,7 +62,7 @@ export function filterAlbums(id){
 
         const response = await fetch(SERVER + '/albums');
         const albums = await response.json();
-        const filteredAlbums = albums.filter(album => album.userId == id);
+        const filteredAlbums = albums.filter(album => album.userId === id);
 
         dispatch({
             type: FILTER_ALBUMS,
