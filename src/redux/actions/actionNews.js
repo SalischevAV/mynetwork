@@ -1,36 +1,17 @@
-import { LOAD_NEWS, CREATE_NEWS } from '../types';
+import { LOAD_NEWS, CREATE_NEWS, SET_NEWS_CURRENT_PAGE } from '../types';
 import { hideLoader, showLoader, showAlert, disableButtons, enableButtons } from './actionApp';
 import {SERVER } from '../../server';
 
-export function loadNews() {
+export function loadNews(currentPage, limit) {
     return async dispatch => {
         try {
             dispatch(showLoader());
             dispatch(disableButtons());
-            let response = await fetch(SERVER + '/posts');
-            const data = await response.json();
-            const postsArr = data.posts;
-
-            response = await fetch(SERVER + '/comments');
-            const commentsArr = await response.json();
-
-            response = await fetch(SERVER+ '/users');
-            const usersArr = await response.json();
-
-            
-          const newsArr = postsArr.map((post) =>(
-             {
-                ...post,
-                user: (usersArr.find(user=>user._id===post.userId)),
-                comments: (commentsArr.filter(comment => comment.postId===post._id)),
-            }
-
-          ));
-  
-
+            const response = await fetch(SERVER + `/news?limit=${limit}&page=${currentPage}`);
+            const data = await response.json(); 
             dispatch({
                 type: LOAD_NEWS,
-                payload:  newsArr,
+                payload:  data,
             })
             dispatch(hideLoader());
             dispatch(enableButtons());
@@ -48,4 +29,11 @@ export function createNews(post){
         type: CREATE_NEWS,
         payload: post,
     })
+}
+
+export function setNewsCurrentPage(page){
+    return{
+        type: SET_NEWS_CURRENT_PAGE,
+        payload: page
+    }
 }

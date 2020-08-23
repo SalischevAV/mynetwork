@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
+import { showAlert } from '../../redux/actions/actionApp'
 
 function Paginator(props) {
     const dispatch = useDispatch();
@@ -29,15 +30,6 @@ function Paginator(props) {
             >
                 {page}
             </Link>)}
-
-            <Link
-                to={props.currentPage < (props.pages.length) ? `/${props.entity}?page=${props.currentPage + 1}` : `/${props.entity}?page=${(props.pages.length)}`}
-                className='btn btn-outline-secondary'
-                onClick={() => dispatch(props.paginatorDispatch(props.currentPage + 1))}
-            >
-                &rarr;
-                 </Link>
-
         </div>
     )
 }

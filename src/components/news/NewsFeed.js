@@ -1,9 +1,9 @@
 import React from 'react';
 import NewsItem from './NewsItem';
 import PostCreateForm from '../posts/PostCreateForm';
+import Paginator from '../common/Paginator'
 
 export default (props) => {
-
     return (
         <React.Fragment>
             <div className='row'>
@@ -19,10 +19,9 @@ export default (props) => {
             <div className="row row-cols-1 row-cols-md-1">
                 {props.news.map(newsItem => <NewsItem newsItem={newsItem} key={newsItem._id} />)}
             </div>
+            {props.pages &&
+                <Paginator pages={props.pages} paginatorDispatch={props.paginatorDispatch} currentPage={props.currentPage} entity={props.entity} />
+            }
         </React.Fragment>
     )
 }
-
-/*
-<button className="btn btn-warning" onClick={() => props.dispatch(loadNews())}>Load News</button>
-*/

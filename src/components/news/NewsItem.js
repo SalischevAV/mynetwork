@@ -10,7 +10,7 @@ export default ({ newsItem }) => {
     };
     return (
         <div className='shadow m-3'>
-            <UserMini user={newsItem.user} />
+            <UserMini user={newsItem.user[0]} />
             <Post post={newsItem} />
             <div className='row'>
 

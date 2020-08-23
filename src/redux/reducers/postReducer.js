@@ -1,4 +1,4 @@
-import { CREATE_POST, LOAD_POSTS, LOAD_POST, UPDATE_POST, CLEAR_POSTS, FILTER_POSTS, SET_CURRENT_PAGE } from '../types';
+import { CREATE_POST, LOAD_POSTS, LOAD_POST, UPDATE_POST, CLEAR_POSTS, FILTER_POSTS, SET_POST_CURRENT_PAGE } from '../types';
 
 const initialState = {
     posts: [],
@@ -15,7 +15,7 @@ export const postReducer = (state = initialState, action) => {
                 posts: action.payload.posts,
                 totalCount: action.payload.total_count,
             };
-        case SET_CURRENT_PAGE:
+        case SET_POST_CURRENT_PAGE:
             return{
                 ...state,
                 currentPage: action.payload,

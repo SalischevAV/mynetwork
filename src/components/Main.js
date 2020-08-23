@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import Navigation from './common/Navigation';
 import User from './users/User';
-import { loadPosts, clearPosts, setCurentPage } from '../redux/actions/actionPost';
-import { loadUsers } from '../redux/actions/actionsUser';
-import { loadNews } from '../redux/actions/actionNews';
-import { loadAlbums } from '../redux/actions/actionAlbum';
+import { loadPosts, clearPosts, setPostCurentPage } from '../redux/actions/actionPost';
+import { loadUsers, setUserCurrentPage } from '../redux/actions/actionsUser';
+import { loadNews, setNewsCurrentPage } from '../redux/actions/actionNews';
+import { loadAlbums, setAlbumCurrentPage } from '../redux/actions/actionAlbum';
 import { AppUserProvider } from './authComponents/AppUser';
 import createPages from '../services/createPages';
 
@@ -29,26 +29,53 @@ export default (props) => {
   const filteredPosts = useSelector(state => state.filter.filteredPosts);
   const filteredAlbums = useSelector(state => state.filter.filteredAlbums);
   const disabledButtons = useSelector(state => state.app.disabled);
+
   const currentPostPage = useSelector(state => state.post.currentPage);
   const limitPosts = useSelector(state => state.post.limit);
   const totalCountPosts = useSelector(state => state.post.totalCount);
-  const pagesPosts = []
+  const pagesPosts = [];
+  createPages(totalCountPosts, limitPosts, currentPostPage, pagesPosts);
+
+
+  const currentUserPage = useSelector(state => state.user.currentPage);
+  const limitUsers = useSelector(state => state.user.limit);
+  const totalCountUsers = useSelector(state => state.user.totalCount);
+  const pagesUsers = [];
+  createPages(totalCountUsers, limitUsers, currentUserPage, pagesUsers);
+
+  const currentAlbumPage = useSelector(state => state.album.currentPage);
+  const limitAlbums = useSelector(state => state.album.limit);
+  const totalCountAlbums = useSelector(state => state.album.totalCount);
+  const pagesAlbums = [];
+  createPages(totalCountAlbums, limitAlbums, currentAlbumPage, pagesAlbums);
+
+  const currentNewsPage = useSelector(state => state.news.currentPage);
+  const limitNews = useSelector(state => state.news.limit);
+  const totalCountNews = useSelector(state => state.news.totalCount);
+  const pagesNews = [];
+  createPages(totalCountNews, limitNews, currentNewsPage, pagesNews);
 
   const clearPostsBtnClickHandler = () => dispatch(clearPosts());
-  const loadPostsBtnClickHandler = () => dispatch(loadPosts());
+  const loadPostsBtnClickHandler = () => dispatch(loadPosts(currentPostPage, limitPosts));
 
-  const paginatorPageDispatch = setCurentPage;
+  const paginatorPostDispatch = setPostCurentPage;
+  const paginatorUserDispatch = setUserCurrentPage;
+  const paginatorAlbumDispatch = setAlbumCurrentPage;
+  const paginatorNewsDispatch = setNewsCurrentPage;
 
-  createPages(totalCountPosts, limitPosts, currentPostPage, pagesPosts)
 
   useEffect(() => {
     dispatch(loadPosts(currentPostPage, limitPosts));
   }, [currentPostPage]);
   useEffect(() => {
-    dispatch(loadUsers());
-    dispatch(loadNews());
-    dispatch(loadAlbums());
-  }, [])
+    dispatch(loadUsers(currentUserPage, limitUsers));
+  }, [currentUserPage]);
+  useEffect(() => {
+    dispatch(loadAlbums(currentAlbumPage, limitAlbums));
+  }, [currentAlbumPage]);
+  useEffect(() => {
+    dispatch(loadNews(currentNewsPage, limitNews));
+  }, [currentNewsPage])
 
   return (
     <AppUserProvider>
@@ -61,10 +88,21 @@ export default (props) => {
             />
             <Suspense fallback={'...loading'}>
               <Switch>
-                <Route exact path={props.match.url + 'users'} component={Users} />
+                <Route exact path={props.match.url + 'users'}
+                  render={() => <Users
+                    pages={pagesUsers}
+                    paginatorDispatch={paginatorUserDispatch}
+                    currentPage={currentUserPage}
+                    entity={'users'}
+                  />}
+                />
                 <Route exact path={props.match.url + 'albums'}
                   render={() => <Albums
                     albums={albums}
+                    pages={pagesAlbums}
+                    paginatorDispatch={paginatorAlbumDispatch}
+                    currentPage={currentAlbumPage}
+                    entity={'albums'}
                   />}
                 />
                 <Route exact path={props.match.url + 'posts'}
@@ -73,7 +111,7 @@ export default (props) => {
                     clearPostsBtnClickHandler={clearPostsBtnClickHandler}
                     loadPostsBtnClickHandler={loadPostsBtnClickHandler}
                     pages={pagesPosts}
-                    paginatorDispatch={paginatorPageDispatch}
+                    paginatorDispatch={paginatorPostDispatch}
                     currentPage={currentPostPage}
                     entity={'posts'}
                   />}
@@ -85,19 +123,22 @@ export default (props) => {
                 <Route
                   path={'/posts/user/:id'}
                   render={() => <Posts
-                    posts={filteredPosts}
-                    pages={pagesPosts}
-                    paginatorDispatch={paginatorPageDispatch}
-                    currentPage={currentPostPage}
+                  posts={filteredPosts}
                   />}
                 />
                 <Route
                   path={'/albums/user/:id'}
-                  render={() => <Albums albums={filteredAlbums} />}
+                  render={() => <Albums
+                    albums={filteredAlbums}
+                  />}
                 />
                 <Route path='/'
                   render={() => <NewsFeed
                     news={news}
+                    pages={pagesNews}
+                    paginatorDispatch={paginatorNewsDispatch}
+                    currentPage={currentNewsPage}
+                    entity={'news'}
                   />}
                 />
                 <Route render={() => <h4>Not found</h4>} />

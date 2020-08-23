@@ -1,4 +1,4 @@
-import { CREATE_POST, LOAD_POSTS, CLEAR_POSTS, FILTER_POSTS, SET_CURRENT_PAGE } from '../types';
+import { CREATE_POST, LOAD_POSTS, CLEAR_POSTS, FILTER_POSTS, SET_POST_CURRENT_PAGE } from '../types';
 import { hideLoader, showLoader, showAlert, disableButtons, enableButtons } from './actionApp';
 import { createNews } from './actionNews';
 import {SERVER } from '../../server';
@@ -60,9 +60,9 @@ export function clearPosts() {
         type: CLEAR_POSTS
     }
 }
-export function setCurentPage(page){
+export function setPostCurentPage(page){
     return {
-        type: SET_CURRENT_PAGE,
+        type: SET_POST_CURRENT_PAGE,
         payload: page,
     }
 }

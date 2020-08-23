@@ -1,13 +1,13 @@
-import {CREATE_USER, LOAD_USER, LOAD_USERS, CLEAR_USERS, DELETE_USER} from '../types';
+import {CREATE_USER, LOAD_USER, LOAD_USERS, CLEAR_USERS, DELETE_USER, SET_USER_CURRENT_PAGE} from '../types';
 import {showLoader, hideLoader, showAlert, hideAlert, disableButtons, enableButtons} from './actionApp';
 import {SERVER } from '../../server';
 
-export function loadUsers(){
+export function loadUsers(currentPage, limit){
     return async dispatch =>{
         try{
             dispatch(showLoader());
             dispatch(disableButtons());
-            const response = await fetch(SERVER + '/users');
+            const response = await fetch(SERVER + `/users?limit=${limit}&page=${currentPage}`);
             const data = await response.json();
            setTimeout(()=>{
             dispatch({
@@ -86,5 +86,12 @@ export function deleteUser(id){
 export function clearUsers(){
     return {
         type: CLEAR_USERS,
+    }
+}
+
+export function setUserCurrentPage(page){
+    return{
+        type: SET_USER_CURRENT_PAGE,
+        payload: page,
     }
 }

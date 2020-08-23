@@ -61,7 +61,7 @@ export function filterAlbums(id){
         dispatch(disableButtons());
 
         const response = await fetch(SERVER + '/albums');
-        const albums = await response.json();
+        const albums = (await response.json()).albums;
         const filteredAlbums = albums.filter(album => album.userId === id);
 
         dispatch({
