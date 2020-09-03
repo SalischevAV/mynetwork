@@ -1,12 +1,18 @@
-import React from 'react';
-import {useDispatch} from 'react-redux';
+import React, { useState, useContext } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteUser } from '../../redux/actions/actionsUser';
-import {filterPosts, filterAlbums} from '../../redux/actions/actionFilter';
+import { filterPosts, filterAlbums } from '../../redux/actions/actionFilter';
+import { AppUserContext } from '../authComponents/AppUser';
 
 
 
 export default ({ user }) => {
+    const AppUser = useContext(AppUserContext);
+    const [collapsed, setCollapsed] = useState(true);
+    const toggleCollapseHandler = () => {
+        setCollapsed(!collapsed)
+    };
     const dispatch = useDispatch();
 
     return (
@@ -23,12 +29,29 @@ export default ({ user }) => {
             <div className="card-body">
                 <div className='row'>
                     <div className='col'>
-                        <Link to={'/posts/user/'+ user._id} className="card-link" onClick={() => dispatch(filterPosts(user._id))}>Posts</Link>
-                        <Link to={'/albums/user/'+ user._id} className="card-link" onClick={() => dispatch(filterAlbums(user._id))}>Albums</Link>
+                        <Link to={'/posts/user/' + user._id} className="card-link" onClick={() => dispatch(filterPosts(user._id))}>Posts</Link>
+                        <Link to={'/albums/user/' + user._id} className="card-link" onClick={() => dispatch(filterAlbums(user._id))}>Albums</Link>
                     </div>
-                    <div className='col'>
-                        <button className='btn btn-outline-danger' onClick={() => dispatch(deleteUser(user.id))}>Delete</button>
-                    </div>
+                    {AppUser.isAdmin &&
+                        <div className='col admin'>
+                            <div className='row'>
+                                <div className='col'>
+                                    <button className='btn btn-outline-danger' onClick={() => dispatch(deleteUser(user.id))}>Delete</button>
+                                </div>
+                                <div className='col'>
+                                    <div className="dropdown">
+                                        <button className="btn btn-outline-secondary dropdown-toggle" type="button" onClick={toggleCollapseHandler}>
+                                            {user.roleId=='5f50e3d0e8a596717fd3e25f'? 'Admin' : 'User'}
+                            </button>
+                                        <div className={collapsed ? 'collapse dropdown-menu' : null} aria-labelledby="dropdownMenuButton">
+                                            <a className="dropdown-item btn btn-outline-secondary" onClick={toggleCollapseHandler} href="#">Admin</a>
+                                            <a className="dropdown-item btn btn-outline-secondary" onClick={toggleCollapseHandler} href="#">User</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
