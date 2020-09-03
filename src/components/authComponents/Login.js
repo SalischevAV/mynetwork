@@ -5,6 +5,7 @@ import { showAlert } from '../../redux/actions/actionApp';
 import app from "../../auth/base";
 import { AuthContext } from "./Auth";
 import {UserCreateForm} from "../users/UserCreateForm.js";
+import { UserCreateFormWithValidation } from '../users/UserCreateFormWithValidation'
 
 const Login = ({ history }) => {
 
@@ -77,7 +78,7 @@ const Login = ({ history }) => {
                     </form>
                 </div>
                 <div className="col col-xs-12 col-md-12 col-lg-12 mt-1 mb-5">
-                    <UserCreateForm />
+                    <UserCreateFormWithValidation />
                 </div>
             </div>
         </div>
