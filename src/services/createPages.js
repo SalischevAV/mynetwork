@@ -10,7 +10,7 @@ export default function createPages(totalCount, limit, currentPage, pages) {
         else {
             for (let i = 1; i <= 10; i++) {
                 pages.push(i)
-                if(i === pagesCount) break
+                if(i === pagesCount) break;
             }
         }
     }  else {

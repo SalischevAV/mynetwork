@@ -5,6 +5,7 @@ import {appReducer} from './appReducer';
 import { newsReducer } from './newsReducer';
 import { filterReducer } from './filterReducer';
 import {albumReducer} from './albumReducer';
+import { chatReducer } from './chatReducer'
 
 export const rootReducer = combineReducers({
     user: userReducer,
@@ -13,4 +14,5 @@ export const rootReducer = combineReducers({
     app: appReducer,
     news: newsReducer,
     filter: filterReducer,
+    chat: chatReducer,
 });

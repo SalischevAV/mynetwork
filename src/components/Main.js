@@ -2,6 +2,7 @@ import React, { useEffect, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import Navigation from './common/Navigation';
+import UsersOnline from './chat/UsersOnline'
 import User from './users/User';
 import { loadPosts, clearPosts, setPostCurentPage } from '../redux/actions/actionPost';
 import { loadUsers, setUserCurrentPage } from '../redux/actions/actionsUser';
@@ -25,6 +26,7 @@ export default (props) => {
   const posts = useSelector(state => state.post.posts);
   const news = useSelector(state => state.news.news);
   const albums = useSelector(state => state.album.albums);
+  const users = useSelector(state => state.user.users);
   const filteredUser = useSelector(state => state.filter.filteredUser);
   const filteredPosts = useSelector(state => state.filter.filteredPosts);
   const filteredAlbums = useSelector(state => state.filter.filteredAlbums);
@@ -83,66 +85,75 @@ export default (props) => {
         {disabledButtons ? <div></div> :
           <div className="container" id="root">
             <Route
-              render={() => <Navigation
-              />}
+              render={() =>
+                <Navigation
+                />}
             />
             <Suspense fallback={'...loading'}>
-              <Switch>
-                <Route exact path={props.match.url + 'users'}
-                  render={() => <Users
-                    pages={pagesUsers}
-                    paginatorDispatch={paginatorUserDispatch}
-                    currentPage={currentUserPage}
-                    entity={'users'}
-                  />}
-                />
-                <Route exact path={props.match.url + 'albums'}
-                  render={() => <Albums
-                    albums={albums}
-                    pages={pagesAlbums}
-                    paginatorDispatch={paginatorAlbumDispatch}
-                    currentPage={currentAlbumPage}
-                    entity={'albums'}
-                  />}
-                />
-                <Route exact path={props.match.url + 'posts'}
-                  render={() => <Posts
-                    posts={posts}
-                    clearPostsBtnClickHandler={clearPostsBtnClickHandler}
-                    loadPostsBtnClickHandler={loadPostsBtnClickHandler}
-                    pages={pagesPosts}
-                    paginatorDispatch={paginatorPostDispatch}
-                    currentPage={currentPostPage}
-                    entity={'posts'}
-                  />}
-                />
-                <Route
-                  path={'/users/:id'}
-                  render={() => <User user={filteredUser} />}
-                />
-                <Route
-                  path={'/posts/user/:id'}
-                  render={() => <Posts
-                  posts={filteredPosts}
-                  />}
-                />
-                <Route
-                  path={'/albums/user/:id'}
-                  render={() => <Albums
-                    albums={filteredAlbums}
-                  />}
-                />
-                <Route path='/'
-                  render={() => <NewsFeed
-                    news={news}
-                    pages={pagesNews}
-                    paginatorDispatch={paginatorNewsDispatch}
-                    currentPage={currentNewsPage}
-                    entity={'news'}
-                  />}
-                />
-                <Route render={() => <h4>Not found</h4>} />
-              </Switch>
+              <div className='row qwe'>
+                <div className='col-9'>
+                  <Switch>
+                    <Route exact path={props.match.url + 'users'}
+                      render={() => <Users
+                        users={users}
+                        pages={pagesUsers}
+                        paginatorDispatch={paginatorUserDispatch}
+                        currentPage={currentUserPage}
+                        entity={'users'}
+                      />}
+                    />
+                    <Route exact path={props.match.url + 'albums'}
+                      render={() => <Albums
+                        albums={albums}
+                        pages={pagesAlbums}
+                        paginatorDispatch={paginatorAlbumDispatch}
+                        currentPage={currentAlbumPage}
+                        entity={'albums'}
+                      />}
+                    />
+                    <Route exact path={props.match.url + 'posts'}
+                      render={() => <Posts
+                        posts={posts}
+                        clearPostsBtnClickHandler={clearPostsBtnClickHandler}
+                        loadPostsBtnClickHandler={loadPostsBtnClickHandler}
+                        pages={pagesPosts}
+                        paginatorDispatch={paginatorPostDispatch}
+                        currentPage={currentPostPage}
+                        entity={'posts'}
+                      />}
+                    />
+                    <Route
+                      path={'/users/:id'}
+                      render={() => <User user={filteredUser} />}
+                    />
+                    <Route
+                      path={'/posts/user/:id'}
+                      render={() => <Posts
+                        posts={filteredPosts}
+                      />}
+                    />
+                    <Route
+                      path={'/albums/user/:id'}
+                      render={() => <Albums
+                        albums={filteredAlbums}
+                      />}
+                    />
+                    <Route path='/'
+                      render={() => <NewsFeed
+                        news={news}
+                        pages={pagesNews}
+                        paginatorDispatch={paginatorNewsDispatch}
+                        currentPage={currentNewsPage}
+                        entity={'news'}
+                      />}
+                    />
+                    <Route render={() => <h4>Not found</h4>} />
+                  </Switch>
+                </div>
+                <div className='col-3 rounded bg-light'>
+                  <UsersOnline />
+                </div>
+              </div>
             </Suspense>
           </div>}
       </Router>
