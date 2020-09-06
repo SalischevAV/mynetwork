@@ -6,10 +6,14 @@ export const refreshUserList = (list)=>{
         let userList = [];
         try{
             list.forEach(async item => {
+                try{
                 const response = await fetch(SERVER + '/users/'+ item);
-                console.log(SERVER + '/users/'+ item)
                 const user = await response.json();
                 userList.push(user);
+                }
+                catch(err){
+                    console.log(err)
+                }
             });
         }
         catch(err){

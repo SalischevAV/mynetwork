@@ -14,9 +14,12 @@ function UsersOnline() {
     const userList = useSelector(state => state.chat.userList);
     socket.on('register', data => dispatch(refreshUserList(data)));
     socket.on('unregister', data => dispatch(refreshUserList(data)));
+    // socket.on('broadcast', data => dispatch(refreshUserList(data)));
     useEffect(
         () => {
+            if(!!AppUser._id){
             socket.emit('register', AppUser._id);
+            }
             return () => {
                 socket.emit('unregister', AppUser._id);
             }
@@ -28,7 +31,7 @@ function UsersOnline() {
             <div>
                 {userList.map(
                     user => (user._id != AppUser._id) ?
-                        (<ChatUser user={user} key={user._id} btnChatClick={() => socket.emit('chat', { user: 'chatuzer' })} />) :
+                        (<ChatUser user={user} key={user._id} btnChatClick={() => socket.emit('chat', { message: 'qwe asd' })} />) :
                         null
                 )}
             </div>
